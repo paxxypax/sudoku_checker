@@ -12,6 +12,20 @@ let puzzle = [[ 8,9,5,   7,4,2,   1,3,6 ],
               [ 7,4,6,   3,2,5,   8,1,9 ],
               [ 3,2,8,   1,9,6,   5,4,7 ]];
 
+//test puzzle to compare with the other puzzle for BONUS comparison function 
+
+let p8zzle = [[ 8,9,5,   7,4,2,   1,3,6 ],
+              [ 8,7,1,   9,6,3,   4,8,5 ],
+              [ 4,6,3,   5,8,1,   7,9,2 ],
+
+              [ 9,3,4,   6,1,7,   2,5,8 ],
+              [ 5,1,7,   2,3,8,   9,6,4 ],
+              [ 6,8,2,   4,5,9,   3,7,1 ],
+
+              [ 1,5,9,   8,7,4,   6,2,3 ],
+              [ 7,4,6,   3,2,5,   8,1,9 ],
+              [ 3,2,8,   1,9,6,   5,4,7 ]];
+
 // getRow: This function should accept two arguments: 
 // a sudoku grid (represented by an array of arrays) and a row index. 
 // The function should return an array containing the numbers in the specified row.
@@ -46,10 +60,18 @@ function getSection(puzzle, x, y){
     }
     return result;
 }
-//possible changes: use slice function instead of indexing?
 
+//possible changes: use slice function instead of indexing
+//alternate function
+// function getSection(puzzle, x, y){
+//     let result = [];
+//     let rows = puzzle.slice(3*x, 3*(x+1));
+//     for (let i = 0; i<=2; i++){
+//         result = result.concat(rows[i].slice(3*y, 3*(y+1)));
+//     }
+//     return result;
+// }
 
-let puzzleNum = getSection(puzzle, 0, 1);
 
 function includes1to9(puzzleNum){
    let checkList = []; 
@@ -72,7 +94,6 @@ function includes1to9(puzzleNum){
    //if all nums switched to true, your game is correct
 }
 
-includes1to9(puzzleNum);
 
 function sudokuIsValid(puzzle){
     for(let i = 0; i < 9; i++){
@@ -93,4 +114,21 @@ function sudokuIsValid(puzzle){
     return true;
 }
 
-sudokuIsValid(puzzle); 
+
+sudokuIsValid(puzzle);
+
+
+//bonus****
+//function to compare two games of sudoku
+function isSame(puzzle, puzzle2){
+    for(let i = 0; i<puzzle.length; i++){
+        for(let j = 0; j<puzzle[i].length; j++){ //nested loop to test 2 dimensional object; checks x-axis
+            if(puzzle[i][j]!==puzzle2[i][j]){ //checks y-axis
+                    return false;
+            }
+        }
+    }
+    return true;
+}
+
+isSame(puzzle, p8zzle);
